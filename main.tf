@@ -32,7 +32,7 @@ locals {
 
 resource "aws_security_group" "windows_sg" {
 
-  name   = "github-actions-windows-sg"
+  name   = "terraform-windows-sg"
   vpc_id = var.vpc_id
 
   ingress {
