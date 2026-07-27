@@ -1,0 +1,33 @@
+name: Terraform AWS Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AKIASXPDJYGGJMQ4UCLH }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.cvjDtcv4EQy6fLCOiU2mynunW7aBFhHZLK5ttlPM }}
+      AWS_DEFAULT_REGION: eu-north-1
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve

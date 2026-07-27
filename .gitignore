@@ -1,0 +1,5 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform_1.15.8_windows_amd64/
+.terraform.lock.hcl
