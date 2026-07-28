@@ -26,10 +26,6 @@ locals {
   }
 }
 
-# data "aws_secretsmanager_secret" "windows_secret" {
-#   name = "windows-admin-creds"
-# }
-
 resource "aws_security_group" "windows_sg" {
 
   name   = "terraform-windows-sg"
@@ -73,6 +69,22 @@ resource "aws_instance" "windows_vm" {
     local.common_tags,
     {
       Name = "GitHubActions-WindowsVM"
+    }
+  )
+}
+
+resource "aws_instance" "windows_vm_2" {
+
+  ami           = "ami-07483e30c9d08daa8"
+  instance_type = var.instance_type
+
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [aws_security_group.windows_sg.id]
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "GitHubActions-WindowsVM-2"
     }
   )
 }
